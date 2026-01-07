@@ -1,10 +1,12 @@
 public class Director extends Person {
-    int numberOfShows;
+    private int numberOfShows;
+    Gender.Genders gender;
 
-    public Director(String name, String surname, int numberOfShows) {
+    public Director(String name, String surname, int numberOfShows, Gender.Genders gender) {
         this.name = name;
         this.surname = surname;
         this.numberOfShows = numberOfShows;
+        this.gender = gender;
     }
 
     @Override
@@ -14,10 +16,6 @@ public class Director extends Person {
                 ", name='" + name + '\'' +
                 ", numberOfShows=" + numberOfShows +
                 '}';
-    }
-
-    public void printDirectorInfo() {
-       toString();
     }
 
 }

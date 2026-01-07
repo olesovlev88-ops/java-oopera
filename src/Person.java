@@ -1,8 +1,14 @@
 public class Person {
     String name;
     String surname;
-    public enum Gender {
-        MALE,
-        FEMALE
+    Gender.Genders gender;
+
+    public Person(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public Person() {
+
     }
 }

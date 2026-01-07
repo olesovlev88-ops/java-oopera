@@ -5,18 +5,18 @@ public class Theatre {
 
     public static void main (String[] args) {
 
-     Actor actor1 = new Actor("Забек ", "Спортсменов ", 160.0);
-     Actor actor2 = new Actor("Антон ", "Шмурдяк ", 150.0);
-     Actor actor3 = new Actor("Ушат ", "Памоев ", 155.0);
+     Actor actor1 = new Actor("Забек", "Спортсменов", 160.0, Gender.Genders.MALE);
+     Actor actor2 = new Actor("Антон", "Шмурдяк", 150.0, Gender.Genders.MALE);
+     Actor actor3 = new Actor("Ушат", "Памоев", 155.0, Gender.Genders.MALE);
 
-     Director director1 = new Director("Хуан", "Педро", 14);
-     Director director2 = new Director("Ногивру", "Ки", 88);
+     Director director1 = new Director("Хуан", "Педро", 14, Gender.Genders.MALE);
+     Director director2 = new Director("Ногивру", "Ки", 88, Gender.Genders.MALE);
 
      Show show = new Show(director1, "Дон Жуан", 140);
-     Opera opera = new Opera(director2, "Мусорского", 20, "Валерий Жмышенко",
-             "Бла бла бла", 3);
-     Ballet ballet = new Ballet(director1, "Голубиное озеро", 50,
-             "Александр Шляпик", "Бе бе бе", "Денис Сухачёв");
+        Person musicAuthor = new Person("Александр", "Шляпик");
+        Opera opera = new Opera(director2, "Мусорского", 20, musicAuthor, "Бла бла бла", 3);
+        Person choreographer = new Person("Денис", "Сухачёв");
+        Ballet ballet = new Ballet(director1, "Голубиное озеро", 50, musicAuthor, "Бе бе бе", choreographer);
 
         Scanner scanner = new Scanner(System.in);
         int cmd;
@@ -26,8 +26,8 @@ public class Theatre {
             System.out.println("1. Распределить актёров по спектаклям");
             System.out.println("2. Вывести список актёров для каждого спектакля");
             System.out.println("3. Заменить актёра в одном из спектаклей");
-            System.out.println("5. Вывести текст либретто для оперного и балетного спектакля");
-            System.out.println("6. Выход");
+            System.out.println("4. Вывести текст либретто для оперного и балетного спектакля");
+            System.out.println("5. Выход");
 
             cmd = scanner.nextInt();
 
@@ -36,14 +36,26 @@ public class Theatre {
                     System.out.println("Выберите спектакль: Обычный, Балет или Опера:");
                     scanner.nextLine();
                     String typeOfShow = scanner.nextLine();
+
+                    System.out.println("Введите имя актёра:");
+                    String name = scanner.nextLine();
+                    System.out.println("Введите фамилию актёра:");
+                    String surname = scanner.nextLine();
+                    System.out.println("Введите рост актёра:");
+                    double height = scanner.nextDouble();
+                    Gender.Genders gender = Gender.Genders.MALE;
+
+                    Actor newActor = new Actor(name, surname, height, gender);
+
                     if (typeOfShow.equals("Обычный")) {
-                        show.addNewActor();
+                        show.addNewActor(newActor);
                     } else if (typeOfShow.equals("Балет")) {
-                        ballet.addNewActor();
+                        ballet.addNewActor(newActor);
                     } else if (typeOfShow.equals("Опера")) {
-                        opera.addNewActor();
+                        opera.addNewActor(newActor);
+                    } else {
+                        System.out.println("Такого варианта нет");
                     }
-                    else {System.out.println("Такого варианта нет");}
                     break;
                 case 2:
                     System.out.println("Актёры в спектакле 'Дон Жуан':");
@@ -60,12 +72,8 @@ public class Theatre {
 
                     if (typeOfShow1.equals("Обычный")) {
                         System.out.println("Введите фамилию заменяемого актёра:");
-                        String surname = scanner.next();
-                        System.out.println("Введите имя, фамилию и рост нового актёра:");
-                        String name = scanner.next();
-                        String otherSurname = scanner.next();
-                        double height = scanner.nextDouble();
-                        Actor newActor = new Actor(name, otherSurname, height);
+                        surname = scanner.nextLine();
+                        newActor = createNewActor(scanner);
                         try {
                             show.changeActor(surname, newActor);
                         } catch (Exception e) {
@@ -73,12 +81,8 @@ public class Theatre {
                         }
                     } else if (typeOfShow1.equals("Балет")) {
                         System.out.println("Введите фамилию заменяемого актёра:");
-                        String surname = scanner.next();
-                        System.out.println("Введите имя, фамилию и рост нового актёра:");
-                        String name = scanner.next();
-                        String otherSurname = scanner.next();
-                        double height = scanner.nextDouble();
-                        Actor newActor = new Actor(name, otherSurname, height);
+                        surname = scanner.nextLine();
+                        newActor = createNewActor(scanner);
                         try {
                             ballet.changeActor(surname, newActor);
                         } catch (Exception e) {
@@ -86,12 +90,8 @@ public class Theatre {
                         }
                     } else if (typeOfShow1.equals("Опера")) {
                         System.out.println("Введите фамилию заменяемого актёра:");
-                        String surname = scanner.next();
-                        System.out.println("Введите имя, фамилию и рост нового актёра:");
-                        String name = scanner.next();
-                        String otherSurname = scanner.next();
-                        double height = scanner.nextDouble();
-                        Actor newActor = new Actor(name, otherSurname, height);
+                        surname = scanner.nextLine();
+                        newActor = createNewActor(scanner);
                         try {
                             opera.changeActor(surname, newActor);
                         } catch (Exception e) {
@@ -101,11 +101,11 @@ public class Theatre {
                         System.out.println("Такого варианта нет");
                     }
                     break;
-                case 5:
+                case 4:
                     opera.printLibrettoText();
                     ballet.printLibrettoText();
                     break;
-                case 6:
+                case 5:
                     System.out.println("До свидания!");
                     return; // Выход из программы
                 default:
@@ -113,5 +113,17 @@ public class Theatre {
             }
         }
 
+    }
+    private static Actor createNewActor(Scanner scanner) {
+        System.out.println("Введите имя нового актёра:");
+        String name = scanner.nextLine();
+        System.out.println("Введите фамилию нового актёра:");
+        String surname = scanner.nextLine();
+        System.out.println("Введите рост нового актёра:");
+        double height = scanner.nextDouble();
+        scanner.nextLine();
+        Gender.Genders gender = Gender.Genders.MALE;
+
+        return new Actor(name, surname, height, gender);
     }
 }

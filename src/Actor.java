@@ -1,12 +1,14 @@
 import java.util.Objects;
 
 public class Actor extends Person {
-    double height;
+    private double height;
 
-    public Actor(String name, String surname, double height) {
+    public Actor(String name, String surname, double height, Gender.Genders gender) {
+        super();
         this.name = name;
         this.surname = surname;
         this.height = height;
+        this.gender = gender;
     }
 
     @Override public boolean equals(Object o) {

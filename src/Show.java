@@ -3,14 +3,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Show {
-    String title;
-    int duration;
-    Director director;
-    ArrayList<Actor> listOfActors;
-    Scanner scanner;
+    protected String title;
+    protected int duration;
+    protected Director director;
+    protected ArrayList<Actor> listOfActors;
 
     public Show(Director director, String title, int duration) {
-        scanner = new Scanner(System.in);
         this.director = director;
         this.title = title;
         this.duration = duration;
@@ -18,18 +16,13 @@ public class Show {
     }
 
     public void printActorsInfo() {
-        for (Actor listOfActor : listOfActors) {
-            System.out.println(listOfActor.toString());
+        for (Actor actor : listOfActors) {
+            System.out.println(listOfActors);
         }
     }
 
 
-    public void addNewActor() {
-        Actor newActor = new Actor(null, null, 0.0);
-        System.out.println("Напишите имя, фамилию и рост актёра:");
-        newActor.name = scanner.nextLine();
-        newActor.surname = scanner.nextLine();
-        newActor.height = scanner.nextDouble();
+    public void addNewActor(Actor newActor) {
         if (listOfActors.contains(newActor)) {
             System.out.println("Этот актёр уже участвует в постановке");
         } else {
@@ -40,17 +33,25 @@ public class Show {
 
     public void changeActor(String surname, Actor newActor) {
         boolean found = false;
+        int count = 0; // счётчик для учёта количества актёров с указанной фамилией
+
         for (int i = 0; i < listOfActors.size(); i++) {
             Actor currentActor = listOfActors.get(i);
             if (currentActor.surname.equals(surname)) {
-                listOfActors.set(i, newActor);
-                found = true;
-                break;
+                count++;
+                if (count > 1) {
+                    System.out.println("В списке есть несколько актёров с фамилией " + surname + ". Замена не выполнена.");
+                    break;
+                } else {
+                    listOfActors.set(i, newActor);
+                    found = true;
+                }
             }
         }
+
         if (!found) {
             System.out.println("Актёр с такой фамилией не найден.");
-        } else {
+        } else if (count == 1) {
             System.out.println("Актёр успешно заменён.");
         }
     }
