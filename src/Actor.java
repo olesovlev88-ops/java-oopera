@@ -5,22 +5,22 @@ public class Actor extends Person {
 
     public Actor(String name, String surname, double height, Gender gender) {
         super(name, surname, gender);
-        this.name = name;
-        this.surname = surname;
         this.height = height;
-        this.gender = gender;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Actor actor = (Actor) o; return Double.compare(height, actor.height) == 0
-                && Objects.equals(name, actor.name) && Objects.equals(surname, actor.surname);
+        Actor actor = (Actor) o;
+        return Double.compare(height, actor.height) == 0
+                && Objects.equals(name, actor.name)
+                && Objects.equals(surname, actor.surname)
+                && Objects.equals(gender, actor.gender);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, height);
+        return Objects.hash(name, surname, gender, height);
     }
 
     @Override
@@ -29,6 +29,7 @@ public class Actor extends Person {
                 "height=" + height +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", gender=" + gender +
                 '}';
     }
 }
