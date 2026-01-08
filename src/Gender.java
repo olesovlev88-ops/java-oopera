@@ -1,6 +1,5 @@
-public class Gender {
-    public enum Genders {
+public enum Gender {
         MALE,
         FEMALE
     }
-}
+

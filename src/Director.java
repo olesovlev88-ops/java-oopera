@@ -1,8 +1,9 @@
 public class Director extends Person {
     private int numberOfShows;
-    Gender.Genders gender;
+    Gender gender;
 
-    public Director(String name, String surname, int numberOfShows, Gender.Genders gender) {
+    public Director(String name, String surname, int numberOfShows, Gender gender) {
+        super(name, surname, gender);
         this.name = name;
         this.surname = surname;
         this.numberOfShows = numberOfShows;

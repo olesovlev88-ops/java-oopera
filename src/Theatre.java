@@ -5,17 +5,17 @@ public class Theatre {
 
     public static void main (String[] args) {
 
-     Actor actor1 = new Actor("Забек", "Спортсменов", 160.0, Gender.Genders.MALE);
-     Actor actor2 = new Actor("Антон", "Шмурдяк", 150.0, Gender.Genders.MALE);
-     Actor actor3 = new Actor("Ушат", "Памоев", 155.0, Gender.Genders.MALE);
+     Actor actor1 = new Actor("Забек", "Спортсменов", 160.0, Gender.MALE);
+     Actor actor2 = new Actor("Антон", "Шмурдяк", 150.0, Gender.MALE);
+     Actor actor3 = new Actor("Ушат", "Памоев", 155.0, Gender.MALE);
 
-     Director director1 = new Director("Хуан", "Педро", 14, Gender.Genders.MALE);
-     Director director2 = new Director("Ногивру", "Ки", 88, Gender.Genders.MALE);
+     Director director1 = new Director("Хуан", "Педро", 14, Gender.MALE);
+     Director director2 = new Director("Ногивру", "Ки", 88, Gender.MALE);
 
      Show show = new Show(director1, "Дон Жуан", 140);
-        Person musicAuthor = new Person("Александр", "Шляпик");
+        Person musicAuthor = new Person("Александр", "Шляпик", Gender.MALE);
         Opera opera = new Opera(director2, "Мусорского", 20, musicAuthor, "Бла бла бла", 3);
-        Person choreographer = new Person("Денис", "Сухачёв");
+        Person choreographer = new Person("Денис", "Сухачёв", Gender.MALE);
         Ballet ballet = new Ballet(director1, "Голубиное озеро", 50, musicAuthor, "Бе бе бе", choreographer);
 
         Scanner scanner = new Scanner(System.in);
@@ -43,7 +43,7 @@ public class Theatre {
                     String surname = scanner.nextLine();
                     System.out.println("Введите рост актёра:");
                     double height = scanner.nextDouble();
-                    Gender.Genders gender = Gender.Genders.MALE;
+                    Gender gender = Gender.MALE;
 
                     Actor newActor = new Actor(name, surname, height, gender);
 
@@ -122,7 +122,7 @@ public class Theatre {
         System.out.println("Введите рост нового актёра:");
         double height = scanner.nextDouble();
         scanner.nextLine();
-        Gender.Genders gender = Gender.Genders.MALE;
+        Gender gender = Gender.MALE;
 
         return new Actor(name, surname, height, gender);
     }
